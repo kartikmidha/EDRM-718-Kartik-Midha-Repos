@@ -1,0 +1,265 @@
+---
+  title:  "Creating a Personal Style Guide"
+  author: "Kartik Midha"
+  output: revealjs
+---
+    
+## This document offers best practices in R
+
+### File names
+
+- Use a meaningful and descriptive names
+
+- End in .R
+
+     - rmd - for RMarkDown files
+
+     - qmd - for Quarto files
+
+- Preferably use camelCase
+
+- If necessary, separate words by _ not .
+
+- Files should be stored in a meaningful directory
+
+```{r}
+#| eval: FALSE
+#| echo: true
+
+# Example for good file name
+
+getData.R
+predict_ad_revenue.R
+
+# Acceptable file name
+
+get_data.R
+predictAdRevenue.R
+	
+# Example for bad file name
+
+foo.bar.r
+u111.r
+predictadrevenue.R
+
+```
+
+- Specific file locations:
+
+```{r}
+#| eval: FALSE
+#| echo: true
+
+# This might work on one machine, but not another:
+
+load("c:/user/kmidha/RProject/Project1/myData.RData")
+
+# This will work on all machines if placed in the project folder:
+
+load("myData.RData")
+
+```
+
+
+### Object names
+
+- R is case sensitive 
+
+- Use names to clarify the meaning
+
+- Try to be consistent for names
+
+- Use _ while naming variable or function name; . is used by default by R in naming
+
+```{r}
+#| echo: true
+
+# Good
+
+student_score <- c(10,12,14,15,11,20,19,7)
+
+score_mean <- mean(student_score)
+
+score_sd <- sd(student_score)
+
+# Bad
+
+st_sc <- c(10,12,14,15,11,20,19,7)
+
+mean_s <- mean(student_score)
+
+s_sd <- sd(student_score)
+
+```
+
+### Use of upper and lower case
+
+- Since R is case sensitive; variable_name and Variable_name is different
+
+- Change case or use CamelCase if not using _ or .
+
+```{r}
+#| echo: true
+
+# Confusing
+
+studentscore <- c(10,12,14,15,11,20,19,7)
+
+# Good
+
+StudentScore <- c(10, 12, 14, 15, 11, 20, 19, 7)
+
+studentScore <- c(10, 12, 14, 15, 11, 20, 19, 7)
+
+```
+
+### Spacing
+
+- Place spaces around all binary operators such as  =, +, -, <-, *, etc.
+
+- Place a space before the ( , except in a function call
+
+- Use space after a comma
+
+```{r}
+#| echo: true
+
+# This isn't terrible:
+
+feet<-c(10,12,13,14,15)
+inches<-c(1,5,6,8,8)
+average<-mean(feet/12+inches,na.rm=TRUE)
+
+# But this is better:
+
+feet <- c(10, 12, 13, 14, 15)
+
+inches <- c(1, 5, 6, 8, 8)
+
+average <- mean(feet / 12 + inches, na.rm=TRUE)
+
+```
+
+- Consistency
+
+```{r}
+
+# Notice the consistent spacing in these comments which would not be
+# so good if I suddenly started creating comments
+#like this
+#      or like this.
+
+```
+
+### Line length
+
+- Keep each line less than 80 characters
+
+```{r}
+#| echo: true
+
+# This is an example of a line that has gone on too long so that it will wrap around and make it difficult to read and introduce an inconsistency with the way we are creating comments.
+
+# This is an example of a line that has not gone on too long so that it
+# we did a wrap around with additional hashtags to make our comments
+# consistent.
+
+```
+
+- Align lines by shared features like parameters if possible
+
+```{r}
+#| eval: FALSE
+#| echo: true
+
+# Good
+someFunction(optionA = alpha,
+             optionB = bravo,
+             optionC = charlie,    
+             optionD = delta)
+
+# Acceptable
+someFunction(optionA = alpha,
+    optionB = bravo, optionC = charlie,    
+    optionD = delta)
+
+# Bad
+someFunction(optionA = alpha, optionB = bravo, optionC = charlie, optionD = delta)
+
+```
+
+### Indentation
+
+- Be consistent for better presentation and avoiding confusion
+
+```{r}
+#| echo: true
+
+# Here's an example of no indentation, making it difficult to understand
+# how this data frame has different items:
+
+our_data_frame <- data.frame(name = c("Joe", "Sue", "Brian"), age = c(28, 32, 45), enrolled = c(FALSE, TRUE, TRUE))
+
+# Look how much nicer this is and easily readable:
+
+our_data_frame <- data.frame(name = c("Joe", "Sue", "Brian"),
+                             
+                             age = c(28, 32, 45),
+                             
+                             enrolled = c(FALSE, TRUE, TRUE))
+
+```
+
+### Assignment operations
+
+- Using = to assign can be confusing
+
+- Use <- to assign
+
+- It is better to write the variable/function name on the left
+
+```{r}
+#| echo: true
+
+# This works, but it can be confusing:
+
+StudentScores = c(34, 39, 41, 37, 39, 28)
+
+c(34, 39, 41, 37, 39, 28) -> StudentScores
+
+# No confusion here:
+
+StudentScores <- c(34, 39, 41, 37, 39, 28)
+
+```
+
+### Commenting
+
+- General comments should be identified with # followed by a space
+
+- Inline comments need 2 spaces before the #
+
+- Function and object descriptions should adhere to roxygen guidelines
+
+- Separate function comments and function code with blank line
+
+- Functions from previous code using 2 blank lines
+
+```{r}
+#| echo: true
+
+# An example of a useful comment:
+
+## Checking how many students have scores greater than 10
+
+student_score <- c(10,12,14,15,11,20,19,7)
+
+ScoreAbove10 <- sum(student_score > 10)
+
+# An example of a comment that is not very useful:
+
+## Setting StudentMean to 6
+
+StudentMean <- 6
+
+```
