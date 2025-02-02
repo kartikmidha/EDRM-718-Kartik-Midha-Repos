@@ -63,7 +63,8 @@ ses_props <- prop.table(ses_counts)
 
 barplot(ses_props,
         xlab = "SES Groups",
-        ylab = "Proportion", ylim = c(0, 0.5))
+        ylab = "Proportion", 
+        ylim = c(0, 0.5))
 ```
 
 ------------------------------------------------------------------------
